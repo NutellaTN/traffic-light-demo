@@ -1,0 +1,34 @@
+apiVersion: devices.kubeedge.io/v1alpha2
+kind: Device
+metadata:
+  name: traffic-light-instance-01
+  labels:
+    description: Light
+    model: traffic-light
+spec:
+  deviceModelRef:
+    name: traffic-light
+  nodeSelector:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: ''
+            operator: In
+            values:
+              - rpi3 # give your edge node name
+status:
+  twins:
+    - propertyName: red
+      desired:
+        metadata:
+          type: string
+        value: "OFF"
+    - propertyName: yellow
+      desired:
+        metadata:
+          type: string
+        value: "OFF"
+    - propertyName: green
+      desired:
+        metadata:
+          type: string
+        value: "OFF"

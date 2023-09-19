@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tl-mapper-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tl-mapper
+  template:
+    metadata:
+      labels:
+        app: tl-mapper
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        node-role.kubernetes.io/edge: ""
+      containers:
+      - name: tl-mapper-container
+        image: ladhar1/tl_mapper:v1.0.0
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
